@@ -16,6 +16,8 @@ On top of the source code, Vladia added comments to explain each piece of the fu
 
 After the implementation of alpha-beta pruning in the program, she noticed an increase in response times during each of the computer's turns. The longest response time was less than 1000ms and occurred primarily at the beginning of the game when the human player went first. This is because, at the start of the game, there are more possible moves to be made. As a result, the algorithm takes slightly longer to go through and choose the most efficient route.
 
+### Possible Improvements
+
 Future improvements that could be added to the project include:
 
 - Implementation in a webpage using TypeScript, leveraging our existing experience in creating an AI tic-tac-toe project in TypeScript.
