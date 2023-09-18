@@ -1,5 +1,7 @@
-import math, time
+import math
+import time
 from Players import HumanPlayer, ComputerPlayer
+
 
 class TicTacToe():
     def __init__(self):
@@ -21,7 +23,8 @@ class TicTacToe():
     # prints the board with numbers to show the positions
     def print_board_nums():
         # 0 | 1 | 2 etc (tells us what number corresponds to what box)
-        number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
+        number_board = [[str(i) for i in range(j*3, (j+1)*3)]
+                        for j in range(3)]
         for row in number_board:
             print('| ' + ' | '.join(row) + ' |')
 
@@ -38,7 +41,7 @@ class TicTacToe():
 
     def winner(self, square, letter):
         # check the row
-        #winner if 3 in a row anywhere .. we have to check all of these!
+        # winner if 3 in a row anywhere .. we have to check all of these!
         # first let's check the row
         row_ind = math.floor(square / 3)
         row = self.board[row_ind*3:(row_ind+1)*3]
@@ -55,19 +58,23 @@ class TicTacToe():
         # but only if the square is an even number (0, 2, 4, 6, 8)
         # these are the only moves possible to win a diagonal
         if square % 2 == 0:
-            diagonal1 = [self.board[i] for i in [0, 4, 8]] # left to right diagonal
+            diagonal1 = [self.board[i]
+                         for i in [0, 4, 8]]  # left to right diagonal
             # print('diag1', diagonal1)
             if all([s == letter for s in diagonal1]):
                 return True
-            diagonal2 = [self.board[i] for i in [2, 4, 6]] # right to left diagonal
+            diagonal2 = [self.board[i]
+                         for i in [2, 4, 6]]  # right to left diagonal
             # print('diag2', diagonal2)
             if all([s == letter for s in diagonal2]):
                 return True
         return False
     # returns true if there is an empty square
+
     def empty_squares(self):
         return ' ' in self.board
     # returns the number of empty squares
+
     def num_empty_squares(self):
         return self.board.count(' ')
 
@@ -75,18 +82,20 @@ class TicTacToe():
         # returns a list of available positions
         return [i for i, x in enumerate(self.board) if x == " "]
 
-# This function is the main function that runs the game. It takes in the game, the x player, 
+# This function is the main function that runs the game. It takes in the game, the x player,
 # the o player, and a boolean that determines whether or not the game is printed.
+
+
 def play(game, x_player, o_player, print_game=True):
 
     if print_game:
         game.print_board_nums()
 
-    letter = 'X' # starting letter
+    letter = 'X'  # starting letter
     # iterate while the game still has empty squares
     while game.empty_squares():
         # get the move from the appropriate player
-        if letter == 'O': # if the letter is O, then it is the o player's turn
+        if letter == 'O':  # if the letter is O, then it is the o player's turn
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
@@ -96,7 +105,7 @@ def play(game, x_player, o_player, print_game=True):
             if print_game:
                 print(letter + ' makes a move to square {}'.format(square))
                 game.print_board()
-                print('') # just empty line
+                print('')  # just empty line
             # if the game has a winner, then print the winner
             if game.current_winner:
                 if print_game:
@@ -104,19 +113,18 @@ def play(game, x_player, o_player, print_game=True):
                 return letter  # ends the loop and exits the game
             letter = 'O' if letter == 'X' else 'X'  # switches player
 
-        time.sleep(.8) # pause
+        time.sleep(.8)  # pause
 
     if print_game:
         print('It\'s a tie!')
-
 
 
 if __name__ == '__main__':
     OPlayer = ComputerPlayer('O')
     XPlayer = HumanPlayer('X')
     t = TicTacToe()
-    print("The aim of this game is to explore adversarial search algorithms, particularly the min-max algorithm. In this project, We have developed a Tic-Tac-Toe AI that employs min-max strategies to determine the optimal move at each turn, ensuring victory every time.")
-    play(t, XPlayer, OPlayer, print_game=True)      
+    print("\nThe aim of this game is to explore adversarial search algorithms, particularly the min-max algorithm. \nIn this project, We have developed a Tic-Tac-Toe AI that employs min-max strategies to \ndetermine the optimal move at each turn, ensuring victory every time.\n")
+    play(t, XPlayer, OPlayer, print_game=True)
     print("Do you want to play again? y/n")
     playAgain = input()
     if playAgain == "y":
@@ -124,4 +132,3 @@ if __name__ == '__main__':
         play(t, XPlayer, OPlayer, print_game=True)
     else:
         pass
-        
