@@ -25,7 +25,7 @@ class HumanPlayer(Player):
 
         #While valid_square is false
         while not valid_square:
-            square = input(self.letter + '\'s turn. Input move 0 - 9: ')
+            square = input(self.letter + '\'s turn. Input move 0 - 8: ')
             #Checks if the input is an integer, and if it is within the gameboard
 
             try:
